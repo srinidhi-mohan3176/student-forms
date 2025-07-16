@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #000000, #3d0066);
+      color: #f2f2f2;
+      min-height: 100vh;
+      padding: 40px 15px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 38px;
+      background: linear-gradient(to right, #c471ed, #f64f59);
+      
+    }
+
+    .form-card {
+      background: linear-gradient(to bottom, #1a1a1a, #2c003e);
+      padding: 35px;
+      border-radius: 16px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 25px rgba(198, 127, 255, 0.3);
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      padding: 12px 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 10px;
+      background: #111;
+      border: 1px solid #555;
+      color: white;
+      border-radius: 6px;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    label {
+      margin-right: 15px;
+    }
+
+    #save-btn {
+      background: linear-gradient(to right, #9c27b0, #7b1fa2);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+    }
+
+    #save-btn:hover {
+      background: linear-gradient(to right, #ba68c8, #8e24aa);
+      transform: scale(1.05);
+    }
+
+    .stu-table {
+      width: 90%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background: #1c1c1c;
+      color: #f2f2f2;
+      box-shadow: 0 0 10px rgba(108, 99, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .stu-table th,
+    .stu-table td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    .stu-table th {
+      background: #9c27b0;
+      color: white;
+    }
+
+    .stu-table tr:nth-child(even) {
+      background-color: #2a2a2a;
+    }
+
+    .stu-table tr:hover {
+      background-color: #3d2b5a;
+    }
+
+    .stu-table button {
+      padding: 6px 12px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .stu-table button:hover {
+      background-color: #e53935;
+    }
+
+    @media (max-width: 600px) {
+      .form-card,
+      .stu-table {
+        width: 100%;
+      }
+
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      .stu-table th, .stu-table td {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>STUDENT FORM</h1>
+
+  <div class="form-card">
+    <form>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td><input type="text" placeholder="Enter your name" class="name" /></td>
+        </tr>
+        <tr>
+          <td>Age</td>
+          <td><input type="text" placeholder="Enter your age" class="age" /></td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>
+            <input type="radio" name="gender" value="male" />
+            <label>Male</label>
+            <input type="radio" name="gender" value="female" />
+            <label>Female</label>
+          </td>
+        </tr>
+        <tr>
+          <td>Course</td>
+          <td>
+            <select class="course">
+              <option value="javascript">JavaScript</option>
+              <option value="java">Java</option>
+              <option value="c">C</option>
+              <option value="c++">C++</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><input type="email" placeholder="Enter your email" class="email" /></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center">
+            <button type="button" id="save-btn" onclick="Data()">Save</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+  <table class="stu-table">
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Course</th>
+      <th>Gender</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </table>
+
+  <script>
+    function Data() {
+      var name = document.querySelector(".name");
+      var age = document.querySelector(".age");
+      var course = document.querySelector(".course");
+      var gender = document.querySelector('input[name="gender"]:checked');
+      var email = document.querySelector(".email");
+      var table = document.querySelector(".stu-table");
+
+      if (!name || !age || !course || !gender || !email || !name.value || !age.value || !email.value) {
+        alert("Oops! Looks like you missed something. Please fill out every field.");
+        return;
+      }
+
+      var newRow = document.createElement("tr");
+
+      var nameCell = document.createElement("td");
+      nameCell.textContent = name.value;
+
+      var ageCell = document.createElement("td");
+      ageCell.textContent = age.value;
+
+      var courseCell = document.createElement("td");
+      courseCell.textContent = course.value;
+
+      var genderCell = document.createElement("td");
+      genderCell.textContent = gender.value;
+
+      var emailCell = document.createElement("td");
+      emailCell.textContent = email.value;
+
+      var actionCell = document.createElement("td");
+      var deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.onclick = function () {
+        table.removeChild(newRow);
+      };
+      actionCell.appendChild(deleteBtn);
+
+      newRow.appendChild(nameCell);
+      newRow.appendChild(ageCell);
+      newRow.appendChild(courseCell);
+      newRow.appendChild(genderCell);
+      newRow.appendChild(emailCell);
+      newRow.appendChild(actionCell);
+
+      table.appendChild(newRow);
+
+      // Clear inputs
+      name.value = "";
+      age.value = "";
+      email.value = "";
+      course.selectedIndex = 0;
+      document.querySelectorAll('input[name="gender"]').forEach((r) => (r.checked = false));
+    }
+  </script>
+</body>
+
+</html>
